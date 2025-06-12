@@ -167,14 +167,6 @@ main {
 
 /* settings section */
 
-.show {
-	display: block;
-}
-
-.chosen {
-	text-decoration: underline;
-}
-
 .settings-modal {
 	background: #353534;
 
@@ -189,8 +181,13 @@ main {
 	z-index: 100;
 
 	display: flex;
+	/* display: none; */
 	flex-direction: column;
 	justify-content: space-between;
+}
+
+.settings-modal.modal-active {
+	display: none;
 }
 
 .settings-body {
@@ -221,9 +218,20 @@ main {
 	cursor: pointer;
 }
 
+.settings-btn.tab-active {
+	text-decoration: 4px underline;
+}
 .settings-content {
 	width: 200px;
 	height: auto;
+}
+
+.settings-content > div {
+	display: none;
+}
+
+.settings-content > div.content-active {
+	display: block;
 }
 
 .timer-settings {
@@ -261,7 +269,13 @@ main {
 	outline: none;
 }
 
-.fotter-btn {
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.footer-btn {
 	display: flex;
 	justify-content: end;
 	gap: 30px;
@@ -270,7 +284,7 @@ main {
 	margin-inline: auto;
 }
 
-.fotter-btn button {
+.footer-btn button {
 	background: #eee;
 	color: #000;
 
@@ -284,13 +298,13 @@ main {
 	cursor: pointer;
 }
 
-.fotter-btn button:nth-child(1):hover {
+.footer-btn button:nth-child(1):hover {
 	color: #04f91891;
 	border: 1px solid #04f91891;
 	background: transparent;
 }
 
-.fotter-btn button:nth-child(2):hover {
+.footer-btn button:nth-child(2):hover {
 	color: #f914049c;
 	border: 1px solid #f914049c;
 	background: transparent;
@@ -351,13 +365,14 @@ main {
 		gap: 30px;
 		height: 50px;
 	}
+	.pomodoro-stop,
 	.pomodoro-start {
 		padding: 2px 20px;
 		font-size: 20px;
 	}
 
-	.pomodoro-stop img,
-	.pomodoro-settings img {
+	.pomodoro-settings img,
+	.pomodoro-refresh img {
 		width: 40px;
 		height: 40px;
 	}

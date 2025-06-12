@@ -1,3 +1,5 @@
+// pomodoro
+
 const buttons = document.querySelectorAll('.btn');
 const pomodoroBtn = document.querySelector('.pomodoro');
 const shortBreakBtn = document.querySelector('.short-break');
@@ -9,10 +11,20 @@ const pomodoroStopBtn = document.querySelector('.pomodoro-stop');
 const pomodoroRefreshBtn = document.querySelector('.pomodoro-refresh');
 const pomodoroSettingsBtn = document.querySelector('.pomodoro-settings');
 
-console.log(actionsBtn);
+// modal
+
+const settingsModal = document.querySelector('.settings-modal');
+const settingsBtn = document.querySelectorAll('.settings-btn');
+const settingsContent = document.querySelectorAll('.settings-content > div');
+const saveBtn = document.querySelector('.save-btn');
+const closeBtn = document.querySelector('.close-btn');
+
+// window.addEventListener('DOMContentLoaded', loadTimerSettings);
 
 let timerInterval;
-let timeRemainning = 25 * 60;
+let timeRemainning = 0;
+
+// pomodoro settings
 
 buttons.forEach((item) => {
 	item.addEventListener('click', () => {
@@ -90,3 +102,68 @@ pomodoroRefreshBtn.addEventListener('click', () => {
 	timeRemainning = 25 * 60;
 	updateTimer();
 });
+
+// modal settings
+
+const LS = localStorage;
+const pomodoroInput = document.getElementById('pomodoro-time');
+const shortBreakInput = document.getElementById('short-break-time');
+const longBreakInput = document.getElementById('long-break-time');
+
+settingsBtn.forEach((elems, index) => {
+	elems.addEventListener('click', () => {
+		if (!elems.classList.contains('tab-active'))
+			settingsBtn.forEach((btn) => {
+				btn.classList.remove('tab-active');
+			});
+		elems.classList.add('tab-active');
+
+		settingsContent.forEach((content) =>
+			content.classList.remove('content-active')
+		);
+		settingsContent[index].classList.add('content-active');
+	});
+});
+
+pomodoroSettingsBtn.addEventListener('click', () => {
+	settingsModal.classList.toggle('modal-active');
+});
+closeBtn.addEventListener('click', () => {
+	settingsModal.classList.toggle('modal-active');
+});
+
+// timer Settings
+
+const saveTimerSettings = () => {
+	const timerObj = {
+		pomodoro: +pomodoroInput.value,
+		shortBreak: +shortBreakInput.value,
+		longBreak: +longBreakInput.value,
+	};
+
+	LS.setItem('timerSettings', JSON.stringify(timerObj));
+};
+
+saveBtn.addEventListener('click', saveTimerSettings);
+
+const loadTimerSettings = () => {
+	const savedSettings = LS.getItem('timerSettings');
+
+	if (savedSettings) {
+		const timerParse = JSON.parse(savedSettings);
+		pomodoroInput.value = timerParse.pomodoro;
+		shortBreakInput.value = timerParse.shortBreak;
+		longBreakInput.value = timerParse.longBreak;
+
+		if (pomodoroBtn.classList.contains('active')) {
+			timeRemainning = timerParse.pomodoro * 60;
+		} else if (shortBreakBtn.classList.contains('active')) {
+			timeRemainning = timerParse.shortBreak * 60;
+		} else if (longBreakBtn.classList.contains('active')) {
+			timeRemainning = timerParse.longBreak * 60;
+		}
+		updateTimer();
+	} else return;
+};
+
+window.addEventListener('DOMContentLoaded', loadTimerSettings);

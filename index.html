@@ -51,10 +51,16 @@
 			</section>
 		</main>
 
-		<section class="settings-modal" aria-label="Settings Panel">
+		<section
+			class="settings-modal modal-active"
+			aria-label="Settings Panel"
+		>
 			<div class="settings-body">
 				<div class="settings-menu">
-					<button class="settings-btn" id="timer-settings-btn">
+					<button
+						class="settings-btn tab-active"
+						id="timer-settings-btn"
+					>
 						Timer
 					</button>
 					<button class="settings-btn" id="sound-settings-btn">
@@ -66,13 +72,15 @@
 				</div>
 
 				<div class="settings-content">
-					<div class="timer-settings">
+					<div class="timer-settings content-active">
 						<div class="timer-settings-item">
 							<div class="timer-item-pomodoro">
 								<label for="pomodoro-time">Pomodoro:</label>
 								<input
 									type="number"
 									id="pomodoro-time"
+									name="pomodoro"
+									autocomplete="off"
 									value="25"
 									max="90"
 									min="1"
@@ -85,6 +93,8 @@
 								<input
 									type="number"
 									id="short-break-time"
+									name="short-break"
+									autocomplete="off"
 									value="5"
 									max="90"
 									min="1"
@@ -95,6 +105,8 @@
 								<input
 									type="number"
 									id="long-break-time"
+									name="long-break"
+									autocomplete="off"
 									value="15"
 									max="90"
 									min="1"
@@ -111,7 +123,7 @@
 				</div>
 			</div>
 
-			<div class="fotter-btn">
+			<div class="footer-btn">
 				<button class="save-btn">Save</button>
 				<button class="close-btn">Close</button>
 			</div>
