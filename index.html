@@ -31,7 +31,7 @@
 		<main>
 			<section class="pomodoro-durations" aria-label="Pomodoro Durations">
 				<div class="form-check">
-					<button class="btn pomodoro active">Pomodoro</button>
+					<button class="btn pomodoro">Pomodoro</button>
 					<button class="btn short-break">Short Break</button>
 					<button class="btn long-break">Long Break</button>
 				</div>
@@ -119,6 +119,33 @@
 					</div>
 					<div class="account-settings">
 						<!-- account -->
+
+						<form class="login-form">
+							<label for="login">Enter login:</label>
+							<input
+								type="text"
+								name="login"
+								class="acc-form-login"
+								id="login"
+							/>
+
+							<label for="pass">Enter passsword:</label>
+							<input
+								type="password"
+								name="pass"
+								class="acc-form-password"
+								id="pass"
+							/>
+
+							<button class="login-btn">Log In</button>
+						</form>
+
+						<div class="user-info d-none">
+							<p class="greeting-text">
+								<!-- <span class="user-name"></span> -->
+							</p>
+							<button class="logout-btn">Log Out</button>
+						</div>
 					</div>
 				</div>
 			</div>
